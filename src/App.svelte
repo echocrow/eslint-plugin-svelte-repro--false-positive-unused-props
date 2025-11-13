@@ -1,13 +1,13 @@
 <script lang="ts" module>
-export class FooController<T extends string = string> {
+export class FooController<T = unknown> {
   #foo: T
 
   constructor(foo: T) {
     this.#foo = foo
   }
 
-  onclose() {
-    console.info(this.#foo)
+  get foo() {
+    return this.#foo
   }
 }
 </script>
@@ -18,9 +18,5 @@ interface Props {
 }
 let {ctrl}: Props = $props()
 
-function onclose() {
-  ctrl.onclose()
-}
+void ctrl.foo
 </script>
-
-<dialog {onclose}>Foo</dialog>
